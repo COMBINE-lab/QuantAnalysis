@@ -4,11 +4,12 @@ def readRSEMTruth(fn, suffix=""):
     df = pd.read_csv(fn, sep='\t', skiprows=1,
                      names=['Name', 'Gene{}'.format(suffix),
                             'Length{}'.format(suffix),
-                            'EffLength{}'.format(suffix),
-                            'Count{}'.format(suffix),
+                            'EffectiveLength{}'.format(suffix),
+                            'NumReads{}'.format(suffix),
                             'TPM{}'.format(suffix),
                             'FPKM{}'.format(suffix),
-                            'IsoPct{}'.format(suffix)])
+                            'IsoPct{}'.format(suffix)], engine='c')
+    df.set_index("Name", inplace=True)
     return df
 
 
@@ -38,7 +39,7 @@ def readExpress(fn, suffix=""):
                      names=["bundle_id{}".format(suffix),
                             "Name",
                             "Length{}".format(suffix),
-                            "eff_length{}".format(suffix),
+                            "EffectiveLength{}".format(suffix),
                             "tot_counts{}".format(suffix),
                             "uniq_counts{}".format(suffix),
                             "NumReads{}".format(suffix),
@@ -53,6 +54,17 @@ def readExpress(fn, suffix=""):
     df.convert_objects(convert_numeric=True)
     df.set_index('Name', inplace=True)
     return df
+
+def readSailfish(fn, suffix=""):
+    df = pd.read_table(fn, engine='c')
+    df.columns = [ "{}{}".format(cn, suffix) if cn != "Name" else cn for cn in df.columns.tolist()]
+    df.dropna(how='all', inplace=True)
+    df.convert_objects(convert_numeric=True)
+    df.set_index('Name', inplace=True)
+    return df
+
+def readSalmon(fn, suffix=""):
+    return readSailfish(fn, suffix)
 
 def readSalmonDeprecated(fn, suffix=""):
     df = pd.read_csv(fn, sep='\t', comment='#',
@@ -83,9 +95,9 @@ def readKallisto(fn, suffix=""):
     df = pd.read_csv(fn, sep='\t', skiprows=1,
                      names=['Name',
                             'Length{}'.format(suffix),
-                            'EffLen{}'.format(suffix),
+                            'EffectiveLength{}'.format(suffix),
                             'NumReads{}'.format(suffix),
-                            'TPM{}'.format(suffix)])
+                            'TPM{}'.format(suffix)], engine='c')
     df.set_index('Name', inplace=True)
     df.convert_objects(convert_numeric=True)
     return df

@@ -20,6 +20,9 @@ def relDiffTP(c1, c2, DF, cutoff=0.1):
     rd = (tpindex[c2] - tpindex[c1]) / tpindex[c1] 
     return rd
 
+def getMedian(df): return df.median()
+def getMean(df): return df.mean()
+
 def relDiff(c1, c2, DF, cutoff=0.00999999, verbose=False):
     import pandas as pd
     """
