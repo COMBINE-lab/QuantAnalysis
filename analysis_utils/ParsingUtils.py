@@ -54,7 +54,7 @@ def readExpress(fn, suffix=""):
     df.set_index('Name', inplace=True)
     return df
 
-def readSalmon(fn, suffix=""):
+def readSalmonDeprecated(fn, suffix=""):
     df = pd.read_csv(fn, sep='\t', comment='#',
                      names=['Name',
                             'Length{}'.format(suffix),
@@ -65,7 +65,7 @@ def readSalmon(fn, suffix=""):
     df.set_index('Name', inplace=True)
     return df
 
-def readSailfish(fn, suffix=""):
+def readSailfishDeprecated(fn, suffix=""):
     df = pd.read_csv(fn, sep='\t', comment='#',
                      names=['Name',
                             'Length{}'.format(suffix),
