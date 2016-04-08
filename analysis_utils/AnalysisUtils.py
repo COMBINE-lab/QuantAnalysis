@@ -23,7 +23,7 @@ def relDiffTP(c1, c2, DF, cutoff=0.1):
 def getMedian(df): return df.median()
 def getMean(df): return df.mean()
 
-def relDiff(c1, c2, DF, cutoff=0.00999999, verbose=False):
+def relDiff(c1, c2, DF, cutoff=0.01, verbose=False):
     import pandas as pd
     """
     Computes the relative difference between the values
@@ -48,7 +48,7 @@ def relDiff(c1, c2, DF, cutoff=0.00999999, verbose=False):
     import numpy as np
     rd = pd.DataFrame(data = {"Name" : DF.index, "relDiff" : np.zeros(len(DF.index))*np.nan})
     rd.set_index("Name", inplace=True)
-    bothZero = DF.loc[(DF[c1] <= cutoff) & (DF[c2] <= cutoff)].index
+    bothZero = DF.loc[(DF[c1] < cutoff) & (DF[c2] < cutoff)].index
     nonZero = DF.index.difference(bothZero)
     if (verbose):
         print("Zero occurs in both columns {} times".format(len(rd.loc[bothZero])))
