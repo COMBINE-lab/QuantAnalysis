@@ -4,6 +4,8 @@ A collection of analyses of the results of Sailfish (and other quantifiers) on a
 
 ## A re-analysis of the RSEM simulated data from the [kallisto](http://www.nature.com/nbt/journal/vaop/ncurrent/full/nbt.3519.html) paper
 
+For a further description of how these are computed, and a deeper analysis, take a look at the related [Jupyter notebook](https://github.com/COMBINE-lab/QuantAnalysis/blob/master/analysis_scripts/AnalyzeRSEM.ipynb).
+
 ```
 mean of medians of signed relative differences is :
  kallisto: 0.00
