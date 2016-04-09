@@ -1,5 +1,13 @@
 import pandas as pd
 
+def readThreeColumnTruth(fn, suffix=""):
+    df = pd.read_csv(fn, sep=' ', skiprows=1,
+                     names=['Name', 'Gene{}'.format(suffix),
+                            'TPM{}'.format(suffix)], engine='c')
+    df.set_index("Name", inplace=True)
+    pd.to_numeric(df, errors='ignore')
+    return df
+
 def readRSEMTruth(fn, suffix=""):
     df = pd.read_csv(fn, sep='\t', skiprows=1,
                      names=['Name', 'Gene{}'.format(suffix),
@@ -31,7 +39,7 @@ def readStringTie(fn, suffix=""):
                             "cov{}".format(suffix),
                             "FPKM{}".format(suffix)])
     df.set_index('Name', inplace=True)
-    df.convert_objects(convert_numeric=True)
+    pd.to_numeric(df)
     return df
 
 def readExpress(fn, suffix=""):
@@ -59,8 +67,9 @@ def readSailfish(fn, suffix=""):
     df = pd.read_table(fn, engine='c')
     df.columns = [ "{}{}".format(cn, suffix) if cn != "Name" else cn for cn in df.columns.tolist()]
     df.dropna(how='all', inplace=True)
-    df.convert_objects(convert_numeric=True)
     df.set_index('Name', inplace=True)
+    pd.to_numeric(df, errors='ignore')
+    #print(df)
     return df
 
 def readSalmon(fn, suffix=""):
@@ -99,7 +108,8 @@ def readKallisto(fn, suffix=""):
                             'NumReads{}'.format(suffix),
                             'TPM{}'.format(suffix)], engine='c')
     df.set_index('Name', inplace=True)
-    df.convert_objects(convert_numeric=True)
+    #df.convert_objects(convert_numeric=True)
+    pd.to_numeric(df, errors='ignore')
     return df
 
 def readProFile(fn, suffix=""):
