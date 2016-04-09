@@ -5,7 +5,7 @@ def readThreeColumnTruth(fn, suffix=""):
                      names=['Name', 'Gene{}'.format(suffix),
                             'TPM{}'.format(suffix)], engine='c')
     df.set_index("Name", inplace=True)
-    pd.to_numeric(df, errors='ignore')
+    pd.to_numeric(df["TPM{}".format(suffix)], errors='ignore')
     return df
 
 def readRSEMTruth(fn, suffix=""):
@@ -17,6 +17,8 @@ def readRSEMTruth(fn, suffix=""):
                             'TPM{}'.format(suffix),
                             'FPKM{}'.format(suffix),
                             'IsoPct{}'.format(suffix)], engine='c')
+    for col in ["TPM", "Length", "EffectiveLength", "NumReads"]:
+        pd.to_numeric(df["{}{}".format(col, suffix)], errors='ignore')
     df.set_index("Name", inplace=True)
     return df
 
@@ -68,8 +70,8 @@ def readSailfish(fn, suffix=""):
     df.columns = [ "{}{}".format(cn, suffix) if cn != "Name" else cn for cn in df.columns.tolist()]
     df.dropna(how='all', inplace=True)
     df.set_index('Name', inplace=True)
-    pd.to_numeric(df, errors='ignore')
-    #print(df)
+    for col in ["TPM", "Length", "EffectiveLength", "NumReads"]:
+        pd.to_numeric(df["{}{}".format(col, suffix)], errors='ignore')
     return df
 
 def readSalmon(fn, suffix=""):
@@ -108,8 +110,8 @@ def readKallisto(fn, suffix=""):
                             'NumReads{}'.format(suffix),
                             'TPM{}'.format(suffix)], engine='c')
     df.set_index('Name', inplace=True)
-    #df.convert_objects(convert_numeric=True)
-    pd.to_numeric(df, errors='ignore')
+    for col in ["TPM", "Length", "EffectiveLength", "NumReads"]:
+        pd.to_numeric(df["{}{}".format(col, suffix)], errors='ignore')
     return df
 
 def readProFile(fn, suffix=""):
