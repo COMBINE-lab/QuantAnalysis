@@ -1,7 +1,7 @@
 import sys, os
 
 # from http://stackoverflow.com/questions/595305/python-path-of-script
-pathname = os.path.dirname(sys.argv[0]) 
+pathname = os.path.dirname(os.path.abspath(sys.argv[0]))
 sys.path.append(os.path.sep.join([pathname, '..', 'analysis_utils']))
 sys.path.append(os.path.sep.join([pathname, '..', 'plotting_utils']))
 
