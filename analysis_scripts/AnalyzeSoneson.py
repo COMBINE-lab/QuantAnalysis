@@ -1,4 +1,5 @@
 import sys, os
+import argparse
 
 # from http://stackoverflow.com/questions/595305/python-path-of-script
 pathname = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -10,8 +11,8 @@ import AnalysisUtils
 
 import numpy as np
 
-def main():
-    sims = os.path.sep.join([pathname, '..', 'sims', 'doi_10.1101_025387', 'dmel'])
+def main(args):
+    sims = os.path.sep.join([pathname, '..', 'sims', 'doi_10.1101_025387', args.species])
 
     rdict = {}
     corrs = {}
@@ -70,4 +71,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='Compute stats on the Soneson et al. dataset')
+    parser.add_argument('species', type=str, choices=['dmel', 'hs'], 
+                        help='the species for which to display results')
+    args = parser.parse_args()
+    main(args)
