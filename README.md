@@ -10,6 +10,11 @@ A collection of analyses of the results of Sailfish (and other quantifiers) on a
 For a further description of how these are computed, and a deeper analysis, take a look at the related [Jupyter notebook](https://github.com/COMBINE-lab/QuantAnalysis/blob/master/analysis_scripts/AnalyzeSonesonDmel.ipynb).
 
 ```
+kallisto_pearson: 0.97,0.98,0.96,0.98,0.97,0.95
+kallisto_spearman: 0.98,0.98,0.98,0.98,0.98,0.98
+sailfish_pearson: 1.0,1.0,1.0,1.0,1.0,1.0
+sailfish_spearman: 0.98,0.98,0.98,0.98,0.98,0.98
+
 mean of medians of signed relative differences is :
  kallisto: -0.04
  sailfish: 0.00
