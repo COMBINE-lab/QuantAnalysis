@@ -29,6 +29,8 @@ median of means of abs relative differences is :
 
 ### *H.* *sapiens*
 
+For a further description of how these are computed, and a deeper analysis, take a look at the related [Jupyter notebook](https://github.com/COMBINE-lab/QuantAnalysis/blob/master/analysis_scripts/AnalyzeSonesonHs.ipynb).
+
 ```
 kallisto_pearson: 1.0,0.99,1.0,1.0,1.0,1.0
 kallisto_spearman: 0.92,0.92,0.92,0.92,0.92,0.92
